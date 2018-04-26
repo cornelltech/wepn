@@ -1,0 +1,15 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	foundry.wepn.me. root.foundry.wepn.me. (
+			      3		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+
+	IN	A	10.8.0.1
+@	IN      NS      x
+x	IN	A	10.8.0.1
+*	IN	A	10.8.0.1
