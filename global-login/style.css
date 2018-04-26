@@ -1,0 +1,154 @@
+body {
+  background-color:#4a75e6;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+a {
+  color: #3e61bf;
+  opacity: .33;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover, a:focus {
+  color: #324e99;
+  opacity: 1.0;
+}
+
+.card {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1300px;
+  background-color: #fff;
+  padding: 1.875em;
+  top: 20px;
+  border-radius: 5px;
+  box-shadow: 0.125em 0.125em 0.125em 0.125em rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.card a {
+  padding: 0.9em 0;
+}
+
+.forgot-link {
+  padding-top: 15px;
+}
+
+.title {
+  color: #4a75e6;
+  letter-spacing: 1.1px;
+  font-size: 26px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.card-body {
+  padding: 2.5em;
+}
+
+.card-body input {
+  width: 100%;
+  padding: 0.938em 0;
+  border: 1px solid #ededed;
+  color: #666;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: transparent;
+  margin-bottom: 20px;
+  transition: all 0.25s;
+}
+
+.card-body input::placeholder {
+  padding: 0 0.625em;
+}
+
+.card-body input:hover, .card-body input:focus {
+  border: 1px solid #d4d4d4;
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+  transition: text-indent 0.3s 0.3s ease;
+  text-indent: -100%;
+  opacity: 1;
+}
+
+[placeholder]:focus::-moz-input-placeholder {
+  transition: text-indent 0.3s 0.3s ease;
+  text-indent: -100%;
+  opacity: 1;
+}
+
+.btn {
+  padding: 0.75em 1.15em;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #3e61bf;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s;
+}
+
+.btn:hover, btn:focus {
+  background-color: #324e99;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1), 0 4px 7px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+
+}
+
+table th {
+  padding: 5px;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+
+    background-color: #3e61bf;
+    color: white;
+}
