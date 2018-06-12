@@ -1,0 +1,41 @@
+version: '3'
+services:
+  system:
+   build: ./system
+   privileged: true
+   ports:
+    - "1500:1500/udp"
+    - "53:53/udp"
+   volumes:
+     - ./persist-data/openvpn:/etc/openvpn
+     - ./persist-data/sqlite:/host/globaldb
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - "80:80"
+  admin-interface:
+    build: ./admin-interface
+    privileged: true
+    ports:
+     - "5000:5000"
+    volumes:
+        - /etc/openvpn:/host/openvpn
+        - ./persist-data/sqlite:/host/globaldb
+  db:
+    build: ./db
+    privileged: true
+    # ports:
+    #   - "5432:5432"
+    volumes:
+         - ./persist-data/postgresql/:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+#     networks:
+#       - internal_network
+#
+# networks:
+#   external_network:
+#   internal_network:
+#     internal: true

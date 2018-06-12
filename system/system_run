@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ovpn_run &
+nginx_run &
+monitor_run &
+bind_run
+#sleep 5 && rc-service nginx status
