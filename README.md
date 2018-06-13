@@ -23,11 +23,30 @@ docker-compose run
 
 ## Applications
 
-### Docker container
+An application is a docker container running on the server, or on any hosting machine provided by the client. It is part of the VPN, so it has a virtual IP as the users.
 
-An 
+### Restrictions
+
+The users want their application safe, and privacy friendly. They don't want it to send data to the Internet (that's actually the main reason why they installed WePN).
+
+Restrictions are managed via iptables on the system container.
+
+Users can manage them with a UI on the admin interface.
+
+### Agregation
+
+Sometimes the company who owns the application need some data to improve (feedbacks for instance). Therefore it can ask some aggregation to get data from the clients and use it.
+
+The users receive a notification and can accept it or not. The company must justify why it needs these data.
+
+### Add and remove
+
+--NOT IMPLEMENTED YET--
+
+To add or remove an app you can go on the admin interface, and chose it from a basic store. It will install the docker on the server, and give you the file to install on your smartphone if there is one.
 
 ### Domains
 
 To communicate simply with the application, a domain is assigned to each application. The main server is resolved by X.wepn.social, where X has to be chosen at initialization. In order to go public, you have to check that the domain is not already taken.
 A new application is assigned Y.X.wepn.social where Y is defined in the application configuration. Every domain is pointing to a unique ip, a reverse proxy (nginx) is in charge of redirecting the requests.
+
