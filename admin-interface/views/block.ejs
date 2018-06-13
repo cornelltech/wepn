@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>WePN admin - block</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="card">
+			<h2 class="title">Block panel for <%= name %></h2>
+
+			<div class="card-body">
+        <br>The virtual IP is <strong><%= address %></strong>
+
+				<br><br><br>
+				Block all internet connexions for this device:
+				<form type="submit" action="/blockgen" method="post" id="submit-form">
+					<button class="btn" id="block-adult-btn">Block</button>
+					<input hidden type="text" name="ip" value="<%= address %>">
+				</form>
+				<form type="submit" action="/blockgen" method="post" id="submit-form">
+					<button class="btn" id="unblock-adult-btn">Unblock</button>
+					<input hidden type="text" name="ip" value="<%= address %>">
+					<input hidden name="unblock" value="true"/>
+				</form>
+
+        <br>
+        <% if(start != end) { %>
+          <br>Your facebook is already blocked between <%= start %> and <%= end %>
+        <% } %>
+        <br>
+        Block facebook :
+        <br>
+        <form type="submit" action="/blockfb" method="post" id="submit-form">
+          <br>From <input placeholder="Start hour" type="time" name="start">
+          <br>To <input placeholder="End hour" type="time" name="end">
+					<input hidden type="text" name="ip" value="<%= address %>">
+  				<button class="btn" >Block</button>
+        </form>
+
+          <% if(start != end) { %>
+        You need to click 100 times on this button to unblock facebook:
+        <br>
+        <button class="btn" id="unblock-fb-btn">Unblock</button>
+        <% } %>
+
+
+        <br><br><br>
+        Block adult content :
+        <form type="submit" action="/blockadult" method="post" id="submit-form">
+          <button class="btn" id="block-adult-btn">Block</button>
+					<input hidden type="text" name="ip" value="<%= address %>">
+        </form>
+        <form type="submit" action="/blockadult" method="post" id="submit-form">
+          <button class="btn" id="unblock-adult-btn">Unblock</button>
+          <input hidden name="unblock" value="true"/>
+					<input hidden type="text" name="ip" value="<%= address %>">
+        </form>
+
+
+			</div>
+		</div>
+	</div>
+
+  <script>
+  var count = 0;
+  var button = document.getElementById("unblock-fb-btn");
+  button.addEventListener("click", function() {
+    count+=1;
+    if(count == 3) {
+      $.ajax({
+        type: "POST",
+        url: "/blockfb",
+        data: {"unblock":"true", "ip":"<%= address %>"},
+        success: function() {
+          window.location = "/dashboard";
+        }
+      });
+    }
+  });
+  </script>
+
+</body>
+
+</html>

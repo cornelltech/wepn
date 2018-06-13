@@ -1,0 +1,167 @@
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>WePN admin - dashboard</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="card">
+			<h2 class="title">Dashboard</h2>
+
+			<div class="card-body">
+        <br>Your virtual IP is <strong><%= address %></strong>
+        <br>
+        <br>
+
+        Connected users :
+        <br>
+        <table class="table table-inverse">
+            <thead>
+              <tr>
+								<th></th>
+                <th>IP</th>
+                <th>Username</th>
+                <th>Last seen</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <% for(var i=0; i < users.length; i++) { %>
+             <tr>
+							 <td><a href="deleteuser?ip=<%= users[i].ip %>"><i class="fa fa-close" style="font-size:24px;color:red"></i></a></td>
+               <td><%= users[i].ip %></td>
+               <td><%= users[i].username %></td>
+               <td><%= users[i].lastref %></td>
+							 <td><a href="status?ip=<%= users[i].ip %>">status</a></td>
+							 <td><a href="block?ip=<%= users[i].ip %>">block</a></td>
+             </tr>
+          <% } %>
+            </tbody>
+
+          </table>
+
+          <br>
+
+					Bluetooth monitoring :
+					<br>
+					<table class="table table-inverse">
+							<thead>
+								<tr>
+									<th>MAC address</th>
+									<th>Name</th>
+									<th>Vendor</th>
+									<th>Type</th>
+									<th>Last Seen</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<% for(var i=0; i < bluetooth_devices.length; i++) { %>
+							 <tr>
+
+								 <td><%= bluetooth_devices[i].mac %></td>
+								 <td><%= bluetooth_devices[i].name %></td>
+								 <td><%= bluetooth_devices[i].vendor %></td>
+								 <td><%= bluetooth_devices[i].type %></td>
+								 <td><%= bluetooth_devices[i].last_seen %></td>
+
+							 </tr>
+						<% } %>
+							</tbody>
+
+						</table>
+
+						<br>
+          <!--
+          Ads :
+          <br>
+          <table class="table table-inverse">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Ad domain</th>
+                  <th>Amount(Kb)</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% for(var i=0; i < users.length; i++) { %>
+               <tr>
+
+                 <td rowspan="<%= users[i].ads.length %>"><%= users[i].username %></td>
+                 <td><%= users[i].ads[0].domain %></td>
+                 <td><%= users[i].ads[0].bandwidth %></td>
+              </tr>
+                 <% for(var j=1; j < users[i].ads.length; j++) { %>
+                   <tr>
+                   <td><%= users[i].ads[j].domain %></td>
+                   <td><%= users[i].ads[j].bandwidth %></td>
+                 </tr>
+                 <% } %>
+
+
+            <% } %>
+              </tbody>
+
+            </table>
+-->
+             Logs :
+            <br>
+            <table class="table table-inverse">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Source IP</th>
+                    <th>Dest IP</th>
+                    <th>Domain</th>
+                    <th>Protocol</th>
+                    <th>Bytes</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% for(var i=0; i < logs.length; i++) { %>
+                 <tr>
+                   <td><%= logs[i].username %></td>
+                   <td><%= logs[i].source %></td>
+                   <td class="tooltip"><%= logs[i].dest %><span class="tooltiptext"><%= ips[logs[i].dest] %></span></td>
+                   <td><%= logs[i].domain %></td>
+                   <td><%= logs[i].prot %></td>
+                   <td><%= logs[i].info %></td>
+                   <td><%= logs[i].date %></td>
+                </tr>
+
+
+              <% } %>
+                </tbody>
+
+              </table>
+			</div>
+
+		</div>
+	</div>
+
+  <script>
+    //setInterval(function() {window.location.reload(true)}, 10000);
+
+  </script>
+
+</body>
+
+</html>

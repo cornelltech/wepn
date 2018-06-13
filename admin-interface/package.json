@@ -1,0 +1,18 @@
+{
+  "name": "admin-interface",
+  "version": "1.0.0",
+  "description": "Admin interface for WePN",
+  "author": "gregoire-deletang@hotmail.fr",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1",
+    "request": "*",
+    "telnet-client": "*",
+    "sqlite3": "*",
+    "body-parser": "*",
+    "ejs": "*"
+  }
+}

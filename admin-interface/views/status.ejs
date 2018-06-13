@@ -1,0 +1,178 @@
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>WePN admin - status</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="card">
+			<h2 class="title">Status for <%= address %></h2>
+
+			<div class="card-body">
+          Name : <%= username %>
+          <br>
+          <br>
+          Average packets sent per day : <%= average_packets %>
+          <br>
+          <br>
+          <canvas id="chartPackets" width="400" height="100"></canvas>
+          Protocol stats :
+          <br>
+          <br>
+          <br>
+          <canvas id="chartProtocol" width="400" height="100"></canvas>
+
+          IP stats :
+          <br>
+          <br>
+          <br>
+          <canvas id="chartIP" width="400" height="100"></canvas>
+          <br><br>
+             Raw outgoing Logs :
+            <br>
+            <table class="table table-inverse">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Source IP</th>
+                    <th>Dest IP</th>
+                    <th>Domain</th>
+                    <th>Protocol</th>
+                    <th>Bytes</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% for(var i=0; i < logs.length; i++) { %>
+                 <tr>
+                   <td><%= logs[i].username %></td>
+                   <td><%= logs[i].source %></td>
+                   <td class="tooltip"><%= logs[i].dest %><span class="tooltiptext"><%= ips[logs[i].dest] %></span></td>
+                   <td><%= logs[i].domain %></td>
+                   <td><%= logs[i].prot %></td>
+                   <td><%= logs[i].info %></td>
+                   <td><%= logs[i].date %></td>
+                </tr>
+
+
+              <% } %>
+                </tbody>
+
+              </table>
+			</div>
+
+		</div>
+	</div>
+
+
+  <script>
+  var ctx = document.getElementById("chartPackets").getContext('2d');
+  var logs_day = {"labels":[], "values":[]};
+    <% for(var i=0; i < logs_day.labels.length; i++) { %>
+      logs_day["labels"].push("<%= logs_day.labels[i] %>")
+    <% } %>
+    <% for(var i=0; i < logs_day.values.length; i++) { %>
+      logs_day["values"].push("<%= logs_day.values[i] %>")
+    <% } %>
+
+
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: logs_day.labels,
+          datasets: [{
+              label: 'packets',
+              data: logs_day.values
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+
+  var logs_protocol = {"labels":[], "values":[]};
+    <% for(var i=0; i < logs_protocol.labels.length; i++) { %>
+      logs_protocol["labels"].push("<%= logs_protocol.labels[i] %>")
+    <% } %>
+    <% for(var i=0; i < logs_protocol.values.length; i++) { %>
+      logs_protocol["values"].push("<%= logs_protocol.values[i] %>")
+    <% } %>
+
+  var ctx = document.getElementById("chartProtocol").getContext('2d');
+  var protocol_chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: logs_protocol.labels,
+          datasets: [{
+              label: 'packets',
+              data: logs_protocol.values
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+
+  var logs_ip = {"labels":[], "values":[]};
+    <% for(var i=0; i < logs_ip.labels.length; i++) { %>
+      logs_ip["labels"].push("<%= logs_ip.labels[i] %>")
+    <% } %>
+    <% for(var i=0; i < logs_ip.values.length; i++) { %>
+      logs_ip["values"].push("<%= logs_ip.values[i] %>")
+    <% } %>
+
+  var ctx = document.getElementById("chartIP").getContext('2d');
+  var protocol_chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: logs_ip.labels,
+          datasets: [{
+              label: 'packets',
+              data: logs_ip.values
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }],
+              xAxes: [{
+                display: false
+              }]
+          }
+      },
+  });
+  </script>
+</body>
+
+</html>
